@@ -8,7 +8,7 @@ If your torrent client renamed your torrent's filename to its hash and you want 
 
 To install, run this command:
 ```
-pip install --upgrade -r requirements.txt
+pip install --upgrade -r torrentool
 ```
 
 ## Usage
@@ -16,9 +16,9 @@ pip install --upgrade -r requirements.txt
 Run the script with this command:
 
 ```
-python rename-from-hash.py
+python rename-from-hash.py /path/to/torrentfiles
 ```
 
-and then enter path to folder that contain the torrent filename you want to fix. It will automatically rename all the torrent files to their corresponding name.
+It will automatically rename all the torrent files to their corresponding name.
 
 Note: If torrent name already exist, it will add a number before the ``.torrent`` extension.
