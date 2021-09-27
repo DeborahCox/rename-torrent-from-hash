@@ -1,9 +1,8 @@
 import os
+import sys
 from torrentool.api import Torrent
 
-torrents_path = input("Enter torrent folder path:")  # Path to folder containing torrent files
-if not torrents_path.endswith("\\"):
-    torrents_path = torrents_path + "\\"
+torrents_path = "\n".join(sys.argv[1:]) 
 
 for subdir, dirs, files in os.walk(torrents_path):
     for filename in files:
@@ -12,6 +11,7 @@ for subdir, dirs, files in os.walk(torrents_path):
         if filepath.endswith(".torrent"):
             torrent = Torrent.from_file(filepath)
             torrent_name = torrent.name
+            print (subdir + torrent_name)
             if not os.path.isfile(torrents_path + torrent_name + ".torrent"):
                 os.rename(filepath, torrents_path + torrent_name + ".torrent")
             else:  # In case duplicate torrent file name
@@ -19,6 +19,6 @@ for subdir, dirs, files in os.walk(torrents_path):
                 counter = 1
                 while os.path.isfile(torrents_path + torrent_name + " " + str(counter) + ".torrent"):
                     counter += 1
-                os.rename(filepath, torrents_path + torrent_name + " " + str(counter) + ".torrent")
+                os.rename(filepath, subdir + torrent_name + " " + str(counter) + ".torrent")
 
 print("Rename complete")
